@@ -57,6 +57,7 @@ private slots:
     void on_btnReplacePrev_clicked();
     void on_btnReplaceAll_clicked();
     void on_btnSelectAll_clicked();
+    void on_btncountAll_clicked();
     void on_actionFind_toggled(bool on);
     void on_actionReplace_toggled(bool on);
     void on_chkShowAdvanced_toggled(bool checked);

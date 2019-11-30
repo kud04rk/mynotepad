@@ -274,8 +274,11 @@ void frmSearchReplace::on_btnReplaceAll_clicked()
 
     addToSearchHistory(ui->cmbSearch->currentText());
     addToReplaceHistory(ui->cmbReplace->currentText());
-
-    QMessageBox::information(this, tr("Replace all"), tr("%1 occurrences have been replaced.").arg(n));
+    
+    QString temp = ui->lblSpacer1->text();
+        temp.clear();
+		temp.append( tr(": %1 occurrences have been replaced.").arg(n));
+		ui->lblSpacer1->setText( temp );
 }
 
 void frmSearchReplace::on_btnSelectAll_clicked()
@@ -286,13 +289,39 @@ void frmSearchReplace::on_btnSelectAll_clicked()
 
     addToSearchHistory(ui->cmbSearch->currentText());
 
-    if (count == 0) {
-        QMessageBox::information(this, tr("Select all"), tr("No results found"));
+    if (count == 0) {        
+        QString temp = ui->lblSpacer1->text();
+        temp.clear();
+		temp.append( ": No results found" );
+		ui->lblSpacer1->setText( temp );
     } else {
         // Focus on main window
         this->m_topEditorContainer->activateWindow();
     }
 }
+
+void frmSearchReplace::on_btncountAll_clicked()
+{
+    int count = this->selectAll(ui->cmbSearch->currentText(),
+                                searchModeFromUI(),
+                                searchOptionsFromUI());
+
+    addToSearchHistory(ui->cmbSearch->currentText());
+
+    if (count == 0) {        
+        QString temp = ui->lblSpacer1->text();
+        temp.clear();
+		temp.append( ": No results found" );
+		ui->lblSpacer1->setText( temp );
+    } else {
+        // Focus on main window
+        QString temp = ui->lblSpacer1->text();
+        temp.clear();
+		temp.append(tr(": %1 occurrences found").arg(count));
+		ui->lblSpacer1->setText( temp );
+    }
+}
+
 
 void frmSearchReplace::on_actionReplace_toggled(bool on)
 {
