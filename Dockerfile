@@ -1,19 +1,23 @@
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 LABEL maintainer="Notepadqq"
 
 RUN apt-get -qq update && apt-get --no-install-recommends -y install \
     build-essential \
-    clang-format-6.0 \
+    clang-format \
     coreutils \
     gcc \
     git \
-    libqt5svg5-dev \
-    libqt5websockets5-dev \
+    libgl1-mesa-dev \
+    libqt6svg6-dev \
+    libqt6websockets6-dev \
+    libqt6core5compat6-dev \
+    libqt6opengl6-dev \
     pkg-config \
-    qtbase5-dev \
-    qttools5-dev-tools \
-    qtwebengine5-dev \
+    qt6-base-dev \
+    qt6-tools-dev-tools \
+    qt6-webengine-dev \
+    qt6-l10n-tools \
     libuchardet-dev
 
-WORKDIR /build/
+WORKDIR /app/
 CMD bash

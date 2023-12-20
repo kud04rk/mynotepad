@@ -77,7 +77,7 @@ QSize QSearchDockTitleButton::sizeHint() const
     return QSize(size, size);
 }
 
-void QSearchDockTitleButton::enterEvent(QEvent *event)
+void QSearchDockTitleButton::enterEvent(QEnterEvent *event)
 {
     if (isEnabled()) update();
     QAbstractButton::enterEvent(event);
@@ -94,7 +94,7 @@ void QSearchDockTitleButton::paintEvent(QPaintEvent* /*evt*/)
     QPainter p(this);
 
     QStyleOptionToolButton opt;
-    opt.init(this);
+    // opt.init(this);
     opt.state |= QStyle::State_AutoRaise;
 
     if (style()->styleHint(QStyle::SH_DockWidget_ButtonsHaveFrame, 0, this))
@@ -109,8 +109,8 @@ void QSearchDockTitleButton::paintEvent(QPaintEvent* /*evt*/)
     }
 
     opt.icon = icon();
-    opt.subControls = 0;
-    opt.activeSubControls = 0;
+    opt.subControls = QStyle::SC_None;
+    opt.activeSubControls = QStyle::SC_None;
     opt.features = QStyleOptionToolButton::None;
     opt.arrowType = Qt::NoArrow;
     int size = style()->pixelMetric(QStyle::PM_SmallIconSize, 0, this);
@@ -159,7 +159,7 @@ void showRegexInfo() {
 QLayout* AdvancedSearchDock::buildLeftTitlebar() {
 
     QLabel* label = new QLabel(tr("Advanced Search"));
-    label->setMaximumWidth(label->fontMetrics().width(label->text()));
+    label->setMaximumWidth(label->fontMetrics().size(Qt::TextSingleLine, label->text()).width());
 
     m_btnClearHistory = new QToolButton;
     m_btnClearHistory->setIcon(IconProvider::fromTheme("edit-clear"));
@@ -403,7 +403,7 @@ QWidget* AdvancedSearchDock::buildSearchPanelWidget() {
 
     gl->setSizeConstraint(QGridLayout::SetNoConstraint);
 
-    // Put the gridview into a vbox with a strecher so the gridview doesn't strech when the panelwidget is resized.
+    // Put the gridview into a vbox with a stretcher so the gridview doesn't stretch when the panelwidget is resized.
     QVBoxLayout* top = new QVBoxLayout();
     top->addWidget( makeDivider(QFrame::HLine) );
     top->addLayout(gl);
@@ -451,7 +451,7 @@ void AdvancedSearchDock::selectSearchFromHistory(int index)
     if (index==-1)
         return;
 
-    // These signals were connected farther down this function in a previous invokation.
+    // These signals were connected farther down this function in a previous invocation.
     if (m_currentSearchInstance && m_currentSearchInstance->isSearchInProgress()) {
         disconnect(m_currentSearchInstance, &SearchInstance::searchCompleted,
                    this, &AdvancedSearchDock::onCurrentSearchInstanceCompleted);

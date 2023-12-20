@@ -10,6 +10,7 @@
 #include <QLineEdit>
 #include <QMessageBox>
 #include <QThread>
+#include <QActionGroup>
 
 frmSearchReplace::frmSearchReplace(TopEditorContainer *topEditorContainer, QWidget *parent) :
     QMainWindow(parent),
@@ -97,7 +98,7 @@ void frmSearchReplace::setSearchText(QString string)
       Workaround is to disable auto complete until the search box was manually edited
       which prevents the bug. Auto complete is enabled again in on_searchStringEdited.
     */
-    ui->cmbSearch->setAutoCompletion(false);
+    // ui->cmbSearch->setCompleter(nullptr);
 }
 
 void frmSearchReplace::setCurrentTab(Tabs tab)
@@ -274,11 +275,8 @@ void frmSearchReplace::on_btnReplaceAll_clicked()
 
     addToSearchHistory(ui->cmbSearch->currentText());
     addToReplaceHistory(ui->cmbReplace->currentText());
-    
-    QString temp = ui->lblSpacer1->text();
-        temp.clear();
-		temp.append( tr(": %1 occurrences have been replaced.").arg(n));
-		ui->lblSpacer1->setText( temp );
+
+    QMessageBox::information(this, tr("Replace all"), tr("%1 occurrences have been replaced.").arg(n));
 }
 
 void frmSearchReplace::on_btnSelectAll_clicked()
@@ -289,11 +287,8 @@ void frmSearchReplace::on_btnSelectAll_clicked()
 
     addToSearchHistory(ui->cmbSearch->currentText());
 
-    if (count == 0) {        
-        QString temp = ui->lblSpacer1->text();
-        temp.clear();
-		temp.append( ": No results found" );
-		ui->lblSpacer1->setText( temp );
+    if (count == 0) {
+        QMessageBox::information(this, tr("Select all"), tr("No results found"));
     } else {
         // Focus on main window
         this->m_topEditorContainer->activateWindow();
