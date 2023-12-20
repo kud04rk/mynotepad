@@ -6,7 +6,7 @@
 
 #include <QObject>
 #include <QQueue>
-#include <QtCore5Compat/QTextCodec>
+#include <QTextCodec>
 #include <QVBoxLayout>
 #include <QVariant>
 #include <QWheelEvent>

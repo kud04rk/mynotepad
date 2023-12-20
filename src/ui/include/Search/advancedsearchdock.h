@@ -17,6 +17,7 @@ class QVBoxLayout;
 class QToolButton;
 class QComboBox;
 class QCheckBox;
+class QEnterEvent;
 
 /**
  * @brief The QDockWidgetTitleButton class is used to display a normal

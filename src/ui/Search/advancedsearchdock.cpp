@@ -27,6 +27,7 @@
 #include <QVBoxLayout>
 #include <QWidget>
 
+
 /**
  * @brief addUniqueToList Adds the given item to the given list. Also removes duplicates from list.
  *        This is just a helper used in the updateXHistory functions.

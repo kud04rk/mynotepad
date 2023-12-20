@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui svg widgets printsupport network webenginewidgets webchannel websockets dbus core5compat
+QT       += core gui svg widgets printsupport network webenginewidgets webchannel dbus
 CONFIG += c++14 link_pkgconfig
 PKGCONFIG += uchardet
 

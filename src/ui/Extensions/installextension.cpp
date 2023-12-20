@@ -101,7 +101,7 @@ namespace Extensions {
 
         QProcess *process = new QProcess(this);
 
-        connect(process, &QProcess::error, [=](){
+        connect(process, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error), [=](){
             setUIClean(false);
 
             QMessageBox infoBox;
