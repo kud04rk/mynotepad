@@ -11,6 +11,7 @@ Thumbs.db
 *.old
 
 /Makefile
+/build/eri.AppDir
 /src/ui/Makefile
 build-notepadqq-Desktop*
 
